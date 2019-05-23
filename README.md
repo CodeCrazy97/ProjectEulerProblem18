@@ -1,5 +1,6 @@
 # ProjectEulerProblem18
-Solves problem 18 from Project Euler.
+Solves problem 18 from Project Euler. The below description is taken directly from the problem description on Project Euler (https://projecteuler.net/problem=18):
+
 By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 
 ![alt text](https://github.com/CodeCrazy97/ProjectEulerProblem18/blob/master/smallNumberTriangle.png)
