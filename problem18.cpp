@@ -6,6 +6,7 @@
 using namespace std;
 
 int const ITEMS = 15;
+void printTwoDimIntArray(int arr[][2*ITEMS-1]);
 
 int main () {
 	int numbers[ITEMS][2*ITEMS-1];
@@ -38,8 +39,7 @@ int main () {
 	if (myfile.is_open()) {
 		while ( getline (myfile,line) ) {
 		  string currentNumber = "";
-		  for (int i = 0; i < line.size(); i++){  // Iterate over the line of characters.
-			  cout << line[i] << "\n";
+		  for (int i = 0; i < line.size(); i++){  // Iterate over the line of characters.			  
 			  if (line[i] == ' ') {  	// Encountered a whitespace in the line.
 				  if (currentNumber != "") {  // There was already a number present. Try placing it into the array.
 					 numbers[currLine][nextNum] = stoi(currentNumber);
@@ -56,8 +56,18 @@ int main () {
 		}
 		myfile.close();
 	}
-
 	else cout << "Unable to open file"; 
+	
+	printTwoDimIntArray(numbers);
 
   return 0;
+}
+
+void printTwoDimIntArray(int arr[][2*ITEMS-1]) {
+	for (int r = 0; r < ITEMS; r++) {
+		for (int c = 0; c < 2*ITEMS-1; c++) {
+			cout << arr[r][c] << "  ";
+		}
+		cout << "\n";
+	}
 }
