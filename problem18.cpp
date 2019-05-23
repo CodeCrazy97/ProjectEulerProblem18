@@ -12,7 +12,7 @@ int main () {
 	
 	
 	string line;
-	ifstream myfile ("C:\\Users\\A521646\\OneDrive - Valvoline\\Documents\\Projects\\C++\\problem18.txt");
+	ifstream myfile ("C:\\Users\\A521646\\OneDrive - Valvoline\\Documents\\Projects\\C++\\Project Euler 18\\problem18.txt");
 
 	// Place all the numbers in a two dimensional array.
 	/*
@@ -42,7 +42,7 @@ int main () {
 			  cout << line[i] << "\n";
 			  if (line[i] == ' ') {  	// Encountered a whitespace in the line.
 				  if (currentNumber != "") {  // There was already a number present. Try placing it into the array.
-					 numbers[currLine][nextNum] = int(currentNumber);
+					 numbers[currLine][nextNum] = stoi(currentNumber);
 				  }
 				  currentNumber = ""; 	// Reset the string that holds the number.
 				  nextNum += 2;  		// Point to the location of the next number - two spots ahead of the current.
