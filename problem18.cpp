@@ -34,24 +34,34 @@ int main () {
 	
 	*/
 	
-	int currLine = 0;
-	int nextNum = ITEMS - 1;  // Points to the location on the current line in the 2-D array where this number should go.
+	
+	
+	int currLine = 0;	
+	int startNum = ITEMS - 1;  // Points to the location on the current line in the 2-D array where this number should go.
+	for (int r = 0; r < ITEMS; r++) {
+		for (int c = 0; c < 2*ITEMS-1; c++) {
+			numbers[r][c] = 0;
+		}	
+	}
+	
 	if (myfile.is_open()) {
+		
 		while ( getline (myfile,line) ) {
+		  int nextNum = startNum;
 		  string currentNumber = "";
-		  for (int i = 0; i < line.size(); i++){  // Iterate over the line of characters.			  
-			  if (line[i] == ' ') {  	// Encountered a whitespace in the line.
-				  if (currentNumber != "") {  // There was already a number present. Try placing it into the array.
-					 numbers[currLine][nextNum] = stoi(currentNumber);
-				  }
-				  currentNumber = ""; 	// Reset the string that holds the number.
-				  nextNum += 2;  		// Point to the location of the next number - two spots ahead of the current.
+		  for (int i = 0; i < line.size(); i++){  				// Iterate over the line of characters.	
+			  if (line[i] == ' ' || i == line.size() - 1) {  	// Encountered a whitespace in the line OR reached the end of the line. Put the last number in the array.
+				if (currentNumber != "") { 		// There was already a number present. Try placing it into the array.					
+					numbers[currLine][nextNum] = stoi(currentNumber); // Convert the string number to an integral number.
+				}
+				currentNumber = ""; 	// Reset the string that holds the number.
+				nextNum += 2;  			// Point to the location of the next number - two spots ahead of the current.
 			  } else {
-				  currentNumber += line[i];	// Get the character.
+				currentNumber += line[i];	// Get the next character.
 			  }
 		  }
 		  // Reset the pointers to look at the next correct row and starting column.
-		  nextNum--;
+		  startNum--;
 		  currLine++;
 		}
 		myfile.close();
@@ -63,11 +73,12 @@ int main () {
   return 0;
 }
 
+
 void printTwoDimIntArray(int arr[][2*ITEMS-1]) {
 	for (int r = 0; r < ITEMS; r++) {
-		for (int c = 0; c < 2*ITEMS-1; c++) {
-			cout << arr[r][c] << "  ";
-		}
 		cout << "\n";
+		for (int c = 0; c < 2*ITEMS-1; c++) {
+			printf("%3d ", arr[r][c]);
+		}
 	}
 }
