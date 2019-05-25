@@ -2,18 +2,49 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
 
 int const ITEMS = 15;
 void printTwoDimIntArray(int arr[][2*ITEMS-1]);
 
-int main () {
+
+string ExePath() {
+    char buffer[MAX_PATH];
+    GetModuleFileName( NULL, buffer, MAX_PATH );
+    string::size_type pos = string( buffer ).find_last_of( "\\/" );
+    return string( buffer ).substr( 0, pos);
+}
+
+int main () { 
+	
 	int numbers[ITEMS][2*ITEMS-1];
 	
 	
 	string line;
-	ifstream myfile ("C:\\Users\\A521646\\OneDrive - Valvoline\\Documents\\Projects\\C++\\Project Euler 18\\problem18.txt");
+	
+	// Get the path to the text file that contains the numbers triangle.
+	string pathToNumbersFile = ExePath();
+	
+	size_t index = 0;
+	while (true) {
+		 /* Locate the substring to replace. */
+		 index = pathToNumbersFile.find("\\", index);
+		 if (index == string::npos) break;
+
+		 /* Make the replacement. */
+		 pathToNumbersFile.replace(index, 1, "\\\\");
+
+		 /* Advance index forward so the next iteration doesn't pick it up as well. */
+		 index += 2;
+	}
+	
+	pathToNumbersFile += "\\\\problem18.txt";
+	
+	// Open a stream from the file.
+	ifstream myfile (pathToNumbersFile);
+	
 
 	// Place all the numbers in a two dimensional array.
 	/*
