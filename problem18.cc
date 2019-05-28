@@ -11,6 +11,7 @@ void printTwoDimIntArray(int arr[][2*ITEMS-1]);
 int solveProblem18(int r, int c, int sum);
 
 int numbers[ITEMS][2*ITEMS-1];	// Global 2d array of integers used to store the "triangle" of numbers.
+int maxPath = -1;
  
 string ExePath() {
     char buffer[MAX_PATH];
@@ -119,12 +120,13 @@ void printTwoDimIntArray(int arr[][2*ITEMS-1]) {
 
 int solveProblem18(int r, int c, int sum) {	
 	if (r == ITEMS) {  // Reached a "leaf" number (a number at the bottom of the triangle). 
-		cout << "sum: " << sum << "\n";
+		cout << "Sum of all numbers along best path: " << maxPath << "\n";
 	} 
-	else {
-		cout << "r : " << r << ", c : " << c << ", value at numbers[r][c] : " << numbers[r][c] << ", sum : " << sum << "\n";
-		
+	else {		
 		sum += numbers[r][c];	// Add current item to the sum.
+		if (sum > maxPath) {
+			maxPath = sum;
+		}		
 		r++;					// Point to next row.
 		solveProblem18(r, c - 1, sum);  // Item in next row, to the left.
 		solveProblem18(r, c + 1, sum);  // Item in next row, to the right.
