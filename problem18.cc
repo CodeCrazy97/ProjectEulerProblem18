@@ -122,8 +122,10 @@ int solveProblem18(int r, int c, int sum) {
 		cout << "sum: " << sum << "\n";
 	} 
 	else {
-		r++;				// Point to next row.
+		cout << "r : " << r << ", c : " << c << ", value at numbers[r][c] : " << numbers[r][c] << ", sum : " << sum << "\n";
+		
 		sum += numbers[r][c];	// Add current item to the sum.
+		r++;					// Point to next row.
 		solveProblem18(r, c - 1, sum);  // Item in next row, to the left.
 		solveProblem18(r, c + 1, sum);  // Item in next row, to the right.
 	}
