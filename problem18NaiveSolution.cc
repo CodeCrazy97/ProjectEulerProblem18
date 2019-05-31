@@ -8,7 +8,7 @@ using namespace std;
 
 int const ITEMS = 15;
 void printTwoDimIntArray(int arr[][2*ITEMS-1]);
-int solveProblem18(int r, int c, int sum);
+void solveProblem18(int r, int c, int sum);
 
 int numbers[ITEMS][2*ITEMS-1];	// Global 2d array of integers used to store the "triangle" of numbers.
 int maxPath = -1;
@@ -118,7 +118,7 @@ void printTwoDimIntArray(int arr[][2*ITEMS-1]) {
 	}
 }
 
-int solveProblem18(int r, int c, int sum) {	
+void solveProblem18(int r, int c, int sum) {	
 	if (r == ITEMS) {  // Reached a "leaf" number (a number at the bottom of the triangle). 
 		cout << "Sum of all numbers along best path: " << maxPath << "\n";
 	} 
@@ -131,6 +131,4 @@ int solveProblem18(int r, int c, int sum) {
 		solveProblem18(r, c - 1, sum);  // Item in next row, to the left.
 		solveProblem18(r, c + 1, sum);  // Item in next row, to the right.
 	}
-	
-	return 0;
 }
