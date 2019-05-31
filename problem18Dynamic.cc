@@ -8,7 +8,7 @@ using namespace std;
 
 int const ITEMS = 15;
 void printTwoDimIntArray(int arr[][2*ITEMS-1]);
-int solveProblem18(int rowNum);
+int solveProblem18(int rowNum, int colPtr);
 
 int numbers[ITEMS][2*ITEMS-1];	// Global 2d array of integers used to store the "triangle" of numbers.
 int maxPath = -1;
@@ -102,7 +102,7 @@ int main () {
 	printTwoDimIntArray(numbers);
 	
 	// Now actually solve problem 18.
-	cout << "\n\n" << solveProblem18(ITEMS - 2) << "\n";
+	cout << "\n\nMax. total from top to bottom: " << solveProblem18(ITEMS - 2, 2*ITEMS - 3) << "\n";
 	
   return 0;
 }
@@ -116,13 +116,13 @@ void printTwoDimIntArray(int arr[][2*ITEMS-1]) {
 	}
 }
 
-int solveProblem18(int rowNum) {	
-	for (int i = 0; i < rowNum; i++) {
-		numbers[rowNum][i] += max(numbers[rowNum+1][i],numbers[rowNum+1][i+1]); 
+int solveProblem18(int rowNum, int colPtr) {		
+	for (int i = ITEMS - rowNum - 1; i <= colPtr; i+=2) {
+		numbers[rowNum][i] += max(numbers[rowNum+1][i-1],numbers[rowNum+1][i+1]); 
 	}
 	if (rowNum == 0) {
 		return numbers[0][ITEMS - 1];
 	} else {
-		return solveProblem18(rowNum - 1);
+		return solveProblem18(rowNum - 1, colPtr - 1);
 	}
 }
